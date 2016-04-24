@@ -3,17 +3,17 @@
 		Add a Note
 	</div>
 	<div class="panel-body">
-		<!-- Name -->
+		@include('tinymce::tpl')  
 		<form role="form" action="{{action('NoteController@store')}}" method="POST">
 			{{ csrf_field() }}
 			<label class="col-xs-3 text-right" for="problem">Problem</label>
 			<div class="col-xs-7">
-				<textarea name="problem" id="problem" type="text" class="form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
+				<textarea name="problem" id="problem" type="text" class="tinymce form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
 				placeholder="What was the problem?"></textarea>
 			</div>
 			<label class="col-xs-3 text-right" for="name">Solution</label>
 			<div class="col-xs-7">
-				<textarea name="solution" id="solution" type="text" class="form-control{{ $errors->has('solution') ? ' has-error' : ''}}" 
+				<textarea name="solution" id="solution" type="text" class="tinymce form-control{{ $errors->has('solution') ? ' has-error' : ''}}" 
 				placeholder="How did you solve it?"></textarea>
 			</div>
 			<div class="col-xs-2 pull-left">
