@@ -7,9 +7,9 @@
 	</ul>
 </div>
 <div class="col-md-9">
-	@if($showCreate)
+	@if(isset($showCreate))
 		@include('layouts.partials.add-note-form')
-	@else
+	@elseif(isset($selectedNote))
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				{{ $selectedNote->problem }}

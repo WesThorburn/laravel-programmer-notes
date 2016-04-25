@@ -13,8 +13,8 @@
 
 Route::get('/', 'NoteController@index');
 
+Route::resource('note', 'NoteController');
+
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
 
-Route::resource('note', 'NoteController');

@@ -9,16 +9,24 @@ use App\Models\Note;
 
 class NoteController extends Controller
 {
-	public function index($showCreate = false, $selectedNote = null){
-		$notes = Note::where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
-		if(!$showCreate && !$selectedNote){
-			$selectedNote = $notes->first();
-		}
-		return view('home')->with(compact('notes', 'showCreate', 'selectedNote'));
+	public function __construct()
+	{
+	    $this->middleware('auth');
 	}
 
-	public function show($id){
-		return $this->index(false, Note::find($id));
+	public function index(){
+		return $this->show();
+	}
+
+	public function show($id = null){
+		$notes = Note::where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
+		if($id){
+			$selectedNote = Note::find($id);
+		}
+		else{
+			$selectedNote = $notes->first();
+		}
+		return view('home')->with(compact('notes', 'selectedNote'));
 	}
 
     public function store(Request $request){
@@ -38,6 +46,8 @@ class NoteController extends Controller
     }
 
     public function create(){
-    	return $this->index(true);
+    	$notes = Note::where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
+    	$showCreate = true;
+    	return view('home')->with(compact('notes', 'showCreate'));
     }
 }
