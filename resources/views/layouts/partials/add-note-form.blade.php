@@ -1,9 +1,9 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		Add a Note
+		Detail a solution to a problem you've encountered...
 	</div>
 	<div class="panel-body">
-		@include('tinymce::tpl', ['els' => ['note']])  
+		@include('tinymce::tpl', ['els' => ['note']])
 		<form role="form" action="{{action('NoteController@store')}}" method="POST">
 			{{ csrf_field() }}
 			<label class="col-xs-1" for="problem">Problem</label>
