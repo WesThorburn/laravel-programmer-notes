@@ -20,25 +20,6 @@
 				<button type="submit" class="btn btn-default">Save</button>
 			</div>
 		</form>
-		@if($errors->has('problem') || $errors->has('solution'))
-			<div class="col-xs-12 quarter-margin-top">
-				<div class="alert alert-danger three-quarter-margin-bottom">
-					<ul>
-			            @foreach ($errors->all() as $error)
-			                <li>{{ $error }}</li>
-			            @endforeach
-			        </ul>
-				</div>
-			</div>
-		@endif
-		@if(Session::has('noteSaveSuccess'))
-			<div class="col-xs-12 quarter-margin-top">
-				<div class="alert alert-success three-quarter-margin-bottom">
-					<ul>
-			            <li>{{ Session('noteSaveSuccess') }}</li>
-			        </ul>
-				</div>
-			</div>
-		@endif
+		@include('layouts.partials.notes-status-messages')
 	</div>
 </div>

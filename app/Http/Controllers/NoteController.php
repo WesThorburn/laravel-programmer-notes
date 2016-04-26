@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Note;
+use Yajra\Datatables\Datatables;
 
 class NoteController extends Controller
 {
@@ -19,14 +20,13 @@ class NoteController extends Controller
 	}
 
 	public function show($id = null){
-		$notes = Note::where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
 		if($id){
 			$selectedNote = Note::find($id);
 		}
 		else{
-			$selectedNote = $notes->first();
+			$selectedNote = Note::orderBy('updated_at', 'DESC')->first();
 		}
-		return view('home')->with(compact('notes', 'selectedNote'));
+		return view('home')->with(compact('selectedNote'));
 	}
 
     public function store(Request $request){
@@ -46,8 +46,33 @@ class NoteController extends Controller
     }
 
     public function create(){
-    	$notes = Note::where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
     	$showCreate = true;
-    	return view('home')->with(compact('notes', 'showCreate'));
+    	return view('home')->with(compact('showCreate'));
+    }
+
+    public function update($id, Request $request){
+    	//Check that requested note belongs to current user
+    	if(Note::find($id)->user_id != \Auth::user()->id){
+    		\Session::flash('noteSaveError', 'There was a problem with your request!');
+        	return redirect()->back();
+    	}
+
+    	$this->validate($request, [
+    		'problem' => 'required|string',
+    		'solution' => 'required|string'
+    	]);
+
+    	$note = Note::find($id);
+    	$note->problem = $request->problem;
+    	$note->solution = $request->solution;
+    	$note->save();
+
+    	\Session::flash('noteSaveSuccess', 'Your Note was saved successfully!');
+        return redirect('/');
+    }
+
+    public function notesDataTable(){
+    	$notes = Note::select('id','problem')->where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
+    	return Datatables::of($notes)->make(true);
     }
 }

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'NoteController@index');
+Route::get('/notesDataTable', 'NoteController@notesDataTable');
 
 Route::resource('note', 'NoteController');
 
