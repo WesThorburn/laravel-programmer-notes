@@ -19,6 +19,7 @@ return [
 
 	'note' => [
 		"selector" => "#solution",
+		"height" => "450px",
 		"language" => 'en',
 		"theme" => "modern",
 		"skin" => "lightgray",

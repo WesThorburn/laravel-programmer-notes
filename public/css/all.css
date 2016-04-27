@@ -1,0 +1,68 @@
+.form-control, .btn{
+	border-radius:0px;
+}
+
+.margin-top-20px{
+	margin-top:20px;
+}
+
+.margin-bottom-20px{
+	margin-bottom:20px;
+}
+
+.margin-top-10px{
+	margin-top:10px;
+}
+
+.margin-bottom-10px{
+	margin-bottom:10px;
+}
+
+.margin-left-15px{
+	margin-left:15px;
+}
+
+.margin-right-15px{
+	margin-right:15px;
+}
+
+.padding-left-0px{
+	padding-left:0px;
+}
+
+.padding-right-0px{
+	padding-right:0px;
+}
+
+.padding-left-right-0px{
+	padding-left:0px;
+	padding-right:0px;
+}
+
+.padding-left-15px{
+	padding-left:15px;
+}
+
+.padding-right-15px{
+	padding-right:15px;
+}
+
+/*Datatables*/
+.paginate_button{
+	border-radius:0px !important;
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: #f0f0f0;
+}
+
+.table-hover > tbody > tr > td.active:hover,
+.table-hover > tbody > tr > th.active:hover,
+.table-hover > tbody > tr.active,
+.table-hover > tbody > tr.active-row,
+.table-hover > tbody > tr.active:hover > td,
+.table-hover > tbody > tr:hover > .active,
+.table-hover > tbody > tr.active:hover > th {
+  background-color: #f0f0f0;
+}
+/*# sourceMappingURL=all.css.map */

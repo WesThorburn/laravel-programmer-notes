@@ -71,8 +71,14 @@ class NoteController extends Controller
         return redirect('/');
     }
 
-    public function notesDataTable(){
-    	$notes = Note::select('id','problem')->where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
-    	return Datatables::of($notes)->make(true);
+    public function notesDataTable($selectedNote = null){
+    	$notes = Note::select('id','problem', 'updated_at')->where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
+    	return Datatables::of($notes)
+    	->setRowClass(function ($note) use($selectedNote){
+    		if(isset($selectedNote) && $selectedNote == $note->id){
+    			return "active-row";
+    		}
+    	})
+    	->make(true);
     }
 }
