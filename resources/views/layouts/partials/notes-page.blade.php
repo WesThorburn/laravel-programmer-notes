@@ -42,6 +42,8 @@
 <script>
 	$(document).ready(function(){
 		var notesTable = $('#notes-table').DataTable({
+			dom: 'ftp',
+			lengthMenu: [10],
 			processing: true,
 	        serverSide: true,
 	        ajax: '/notesDataTable',
