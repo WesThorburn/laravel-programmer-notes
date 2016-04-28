@@ -3,13 +3,13 @@
 		<a href="/note/create" class="btn btn-primary">Create Note</a>
 	</div>
 	<div class="padding-left-0px">
-		<input type="text" class="margin-top-10px" id="noteSearchField" placeholder="Search notes">
+		<input type="text" class="margin-top-10px font-size-18px" id="noteSearchField" placeholder="Search notes">
 	</div>
 	<table id="notes-table" class="margin-top-10px table-hover responsive" cellspacing="0" width="100%">
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Notes</th>
+				<th>Existing Notes</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -25,17 +25,15 @@
 			<input type="hidden" name="_method" value="put"/>
 			{{ csrf_field() }}
 
-			<input name="problem" id="problem" type="text" class="form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
+			<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
 			placeholder="What was the problem?" value="{{ $selectedNote->problem }}">
 
 			<div class="margin-top-10px">
-				<textarea name="solution" id="solution" type="text" class="tinymce form-control{{ $errors->has('solution') ? ' has-error' : ''}}" 
+				<textarea name="solution" id="solution" type="text" class="tinymce form-control{{ $errors->has('solution') ? ' has-error' : '' }}" width="99%"
 				placeholder="How did you solve it?">{{ $selectedNote->solution }}</textarea>
 			</div>
 
-			<div class="padding-right-15px">
-				<button type="submit" class="btn btn-default pull-right margin-top-10px">Update</button>
-			</div>
+			<button type="submit" class="btn btn-default pull-right margin-top-10px">Update</button>
 		</form>
 		@include('layouts.partials.notes-status-messages')
 	@endif
@@ -50,7 +48,7 @@
 			order: [[2, "desc"]],
 			processing: true,
 	        serverSide: true,
-	        ajax: '/notesDataTable/'+'<?php echo $selectedNote->id ?>',
+	        ajax: '/notesDataTable/'+'<?php echo isset($selectedNote) ? $selectedNote->id : null ?>',
 	        columns: [
 				{data: 'id', name: 'id', "visible": false, searchable: false},
 				{data: 'problem', name: 'problem', searchable: true},

@@ -2,6 +2,10 @@
 	border-radius:0px;
 }
 
+.font-size-18px{
+	font-size:18px;
+}
+
 .margin-top-20px{
 	margin-top:20px;
 }
@@ -47,12 +51,92 @@
 	padding-right:15px;
 }
 
+.notes-text-limit{
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset{
+	max-width:99.99% !important;
+}
+
+/*col-xs*/
 @media(max-width: 768px){
+	.notes-text-limit{
+		width: 100%;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+	}
 	.col-xs-margin-top-10px{
 		margin-top: 10px;
 	}
 	.col-xs-margin-top-20px{
 		margin-top: 20px;
+	}
+}
+
+/*col-sm*/
+@media(min-width: 768px) and (max-width: 992px){
+	.notes-text-limit{
+		width: 216px;
+	}
+}
+
+/*col-md*/
+@media(min-width: 992px) and (max-width: 1200px){
+	.notes-text-limit{
+		width: 205px;
+	}
+}
+
+/*col-lg*/
+@media(min-width: 1200px) and (max-width:1500px){
+	.notes-text-limit{
+		width: 261px;
+	}
+}
+
+/*> 1500px and < 1800px */
+@media(min-width: 1500px) and (max-width:1800px){
+	.notes-text-limit{
+		width: 335px;
+	}
+}
+
+/*> 1800px < 2100px*/
+@media(min-width: 1800px) and (max-width:2100px){
+	.notes-text-limit{
+		width: 405px;
+	}
+}
+
+/*> 1800px < 2100px*/
+@media(min-width: 2100px) and (max-width:2400px){
+	.notes-text-limit{
+		width: 485px;
+	}
+}
+
+/*> 1800px < 2100px*/
+@media(min-width: 2400px) and (max-width:2700px){
+	.notes-text-limit{
+		width: 565px;
+	}
+}
+
+/*> 1800px < 2100px*/
+@media(min-width: 2700px) and (max-width:3000px){
+	.notes-text-limit{
+		width: 635px;
+	}
+}
+
+/*> 3000px */
+@media(min-width: 3000px){
+	.notes-text-limit{
+		width: 715px;
 	}
 }
 

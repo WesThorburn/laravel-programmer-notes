@@ -79,6 +79,9 @@ class NoteController extends Controller
     			return "active-row";
     		}
     	})
+        ->editColumn('problem', function($note){
+                return '<div class="notes-text-limit">'.$note->problem.'</div>';
+            })
     	->make(true);
     }
 }

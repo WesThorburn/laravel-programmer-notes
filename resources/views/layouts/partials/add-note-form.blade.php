@@ -2,7 +2,7 @@
 <form role="form" action="{{action('NoteController@store')}}" method="POST">
 	{{ csrf_field() }}
 	<div class="col-xs-12">
-		<input name="problem" id="problem" type="text" class="form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
+		<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
 		placeholder="What was the problem?">
 	</div>
 	<div class="col-xs-12 margin-top-10px">
