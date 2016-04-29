@@ -10,7 +10,7 @@
 			<tr>
 				<th>Id</th>
 				<th>Existing Notes</th>
-				<th></th>
+				<th>Last Updated</th>
 			</tr>
 		</thead>
 	</table>
@@ -21,7 +21,7 @@
 	@elseif(isset($selectedNote))
 		<!-- Display Note Display/Edit Form -->
 		@include('tinymce::tpl', ['els' => ['note']])
-		<form role="form" action="{{action('NoteController@update', ['id' => $selectedNote->id])}}" method="POST">
+		<form role="form" id="noteForm" action="{{action('NoteController@update', ['id' => $selectedNote->id])}}" method="POST">
 			<input type="hidden" name="_method" value="put"/>
 			{{ csrf_field() }}
 
@@ -40,6 +40,7 @@
 </div>
 
 <script>
+	//Notes list display
 	$(document).ready(function(){
 		var notesTable = $('#notes-table').DataTable({
 			dom: 'tp',
@@ -67,4 +68,24 @@
 			oTable.search($(this).val()).draw();
 		});
 	});
+
+	//Notes edit AJAX posting
+    $("#noteForm").submit(function(event) {
+		event.preventDefault();
+
+		var $form = $( this ),
+			csrfToken = document.getElementsByName("_token")[0].value;
+			problem = document.getElementById("problem").value;
+			solution = document.getElementById("solution").value;
+
+		console.log(csrfToken);
+		console.log(problem);
+		console.log(solution);
+
+		var posting = $.post( "{{action('NoteController@update', ['id' => $selectedNote->id])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
+
+		posting.done(function( data ) {
+			alert('success');
+		});
+    });
 </script>

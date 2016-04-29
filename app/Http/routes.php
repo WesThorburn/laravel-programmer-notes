@@ -10,11 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', 'NoteController@index');
-Route::get('/notesDataTable/{selectedNote?}', 'NoteController@notesDataTable');
-
-Route::resource('note', 'NoteController');
+Route::group(['middleware' => ['web']], function(){
+	Route::get('/', 'NoteController@index');
+	Route::get('/notesDataTable/{selectedNote?}', 'NoteController@notesDataTable');
+	Route::resource('note', 'NoteController');
+});
 
 Route::auth();
 
