@@ -23,28 +23,6 @@
     <!-- Scripts -->
     <script src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-
-    <!-- Load libraries -->
-    <script src="angular2/bundles/angular2-polyfills.js"></script>
-    <script src="es6-shim/es6-shim.min.js"></script>
-    <script src="systemjs/dist/system.src.js"></script>
-
-    <script>
-        System.config({
-            "defaultJSExtensions": true,
-            packages: {
-                app: {
-                    format: 'register',
-                    defaultExtension: 'js'
-                }
-            }
-        });
-
-        System.import('app/boot').then(null, console.error.bind(console));
-    </script>
-    <script src="systemjs/dist/system-polyfills.js"></script>
-    <script src="rxjs/bundles/Rx.js"></script>
-    <script src="angular2/bundles/angular2.dev.js"></script>
     
     <style>
         body {

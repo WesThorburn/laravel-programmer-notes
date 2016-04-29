@@ -2,7 +2,7 @@
 
 return [
 
-	'cdn' => Config('app.url').':8000/vendor/js/tinymce/tinymce.min.js',
+	'cdn' => url('vendor/js/tinymce/tinymce.min.js'),
 
 	'default' => [
 		"selector" => ".tinymce",
@@ -31,4 +31,5 @@ return [
 		],
 		"toolbar" => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
 	],
+
 ];
