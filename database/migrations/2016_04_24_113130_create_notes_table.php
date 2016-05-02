@@ -17,6 +17,7 @@ class CreateNotesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->text('problem');
             $table->text('solution');
+            $table->boolean('private');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

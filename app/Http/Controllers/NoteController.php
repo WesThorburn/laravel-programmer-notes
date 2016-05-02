@@ -86,6 +86,28 @@ class NoteController extends Controller
     }
 
     public function noteSettings(Request $request){
-        dd($request);
+        //Check that requested note belongs to current user
+        if(Note::find($request->id)->user_id != \Auth::user()->id){
+            \Session::flash('noteSaveError', 'There was a problem with your request!');
+            return redirect()->back();
+        }
+
+        $this->validate($request, [
+            'privateNote' => 'in:on,off',
+        ]);
+
+        if($request->privateNote == "on"){
+            $privateStatus = 1;
+        }
+        else{
+            $privateStatus = 0;
+        }
+
+        $note = Note::find($request->id);
+        $note->private = $privateStatus;
+        $note->save();
+
+        \Session::flash('noteSaveSuccess', 'Your Note settings were saved successfully!');
+        return redirect('/');
     }
 }
