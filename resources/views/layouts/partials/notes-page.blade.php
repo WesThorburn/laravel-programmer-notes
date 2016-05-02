@@ -82,7 +82,7 @@
 		console.log(problem);
 		console.log(solution);
 
-		var posting = $.post( "{{action('NoteController@update', ['id' => $selectedNote->id])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
+		var posting = $.post( "{{action('NoteController@update', ['id' => isset($selectedNote) ? $selectedNote->id : null])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
 
 		posting.done(function( data ) {
 			alert('success');
