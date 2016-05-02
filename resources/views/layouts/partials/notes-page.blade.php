@@ -25,8 +25,14 @@
 			<input type="hidden" name="_method" value="put"/>
 			{{ csrf_field() }}
 
-			<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
-			placeholder="What was the problem?" value="{{ $selectedNote->problem }}">
+			<div class="input-group">
+				<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
+				placeholder="What was the problem?" value="{{ $selectedNote->problem }}">
+				<span class="input-group-btn">
+					<button class="btn btn-default" id="settingsButton" type="button"><span class="glyphicon glyphicon-cog"></span></button>
+					<button class="btn btn-default colour-green" id="saveButton" type="button">Save <span class="glyphicon glyphicon-ok"></span></button>
+				</span>
+			</div>
 
 			<div class="margin-top-10px">
 				<textarea name="solution" id="solution" type="text" class="tinymce form-control{{ $errors->has('solution') ? ' has-error' : '' }}" width="99%"

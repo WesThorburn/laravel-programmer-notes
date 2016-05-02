@@ -57,6 +57,18 @@
     overflow: hidden;
 }
 
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{
+	margin-left:10px;
+}
+
+.colour-green{
+	color:#31942F;
+}
+
+.colour-red{
+	color:#AF3535;
+}
+
 .mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset{
 	max-width:99.99% !important;
 }
