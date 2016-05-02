@@ -84,4 +84,8 @@ class NoteController extends Controller
             })
     	->make(true);
     }
+
+    public function noteSettings(Request $request){
+        dd($request);
+    }
 }

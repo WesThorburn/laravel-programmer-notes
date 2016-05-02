@@ -29,7 +29,7 @@
 				<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
 				placeholder="What was the problem?" value="{{ $selectedNote->problem }}">
 				<span class="input-group-btn">
-					<button class="btn btn-default" id="settingsButton" type="button"><span class="glyphicon glyphicon-cog"></span></button>
+					<button class="btn btn-default" id="settingsButton" type="button" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span></button>
 					<button class="btn btn-default colour-green" id="saveButton" type="button">Save <span class="glyphicon glyphicon-ok"></span></button>
 				</span>
 			</div>
@@ -44,6 +44,8 @@
 		@include('layouts.partials.notes-status-messages')
 	@endif
 </div>
+
+@include('layouts.partials.settings-modal')
 
 <script>
 	//Notes list display
