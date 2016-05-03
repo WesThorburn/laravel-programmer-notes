@@ -1,4 +1,4 @@
-@include('tinymce::tpl', ['els' => ['note']])
+@include('layouts.partials.tinymce-solution-configuration')
 <form role="form" action="{{action('NoteController@store')}}" method="POST">
 	{{ csrf_field() }}
 	<div class="col-xs-12">
