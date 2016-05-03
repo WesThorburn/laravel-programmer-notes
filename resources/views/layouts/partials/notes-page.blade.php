@@ -27,10 +27,10 @@
 
 			<div class="input-group">
 				<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
-				placeholder="What was the problem?" value="{{ $selectedNote->problem }}">
+				placeholder="What was the problem?" value="{{ $selectedNote->problem }}" onkeyup="setTimeout(saveForm, 3000)">
 				<span class="input-group-btn">
 					<button class="btn btn-default" id="settingsButton" type="button" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span></button>
-					<button class="btn btn-default colour-green" id="saveButton" type="button">Save <span class="glyphicon glyphicon-ok"></span></button>
+					<button class="btn btn-default" id="saveButton" type="button">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
 				</span>
 			</div>
 
@@ -78,9 +78,7 @@
 	});
 
 	//Notes edit AJAX posting
-    $("#noteForm").submit(function(event) {
-		event.preventDefault();
-
+	function saveForm(){
 		var $form = $( this ),
 			csrfToken = document.getElementsByName("_token")[0].value;
 			problem = document.getElementById("problem").value;
@@ -93,7 +91,7 @@
 		var posting = $.post( "{{action('NoteController@update', ['id' => isset($selectedNote) ? $selectedNote->id : null])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
 
 		posting.done(function( data ) {
-			alert('success');
+			changeSaveButton("hasBeenSaved");
 		});
-    });
+	}
 </script>

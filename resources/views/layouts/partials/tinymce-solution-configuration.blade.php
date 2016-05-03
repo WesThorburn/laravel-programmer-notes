@@ -11,8 +11,23 @@
 		"toolbar":"undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
 		"setup":function(ed) {
 		    ed.on('keyup', function(e) {
-		        console.log('onkeyup event detected, this is the textarea contents: ' + ed.getContent());
+		    	handleSave();
 		    });
 		}
 	});
-	</script>
+
+	function handleSave(){
+		changeSaveButton('needsToBeSaved');
+		setTimeout(saveForm, 3000);
+	}
+
+	function changeSaveButton(saveStatus){
+		if(saveStatus == "needsToBeSaved"){
+			$('#saveButton').removeClass("colour-green");
+			document.getElementById("saveButton").innerHTML = 'Save <span class="glyphicon glyphicon-floppy-disk">';
+		} else if(saveStatus == "hasBeenSaved"){
+			$('#saveButton').addClass("colour-green");
+			document.getElementById("saveButton").innerHTML = 'Saved <span class="glyphicon glyphicon glyphicon-ok">';
+		}
+	}
+</script>
