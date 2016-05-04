@@ -17,25 +17,18 @@
 	});
 
 	var waitStatus = "ready";
-	var timeoutHandle = setTimeout(function(){ 
-		saveForm();
-		waitStatus = "ready"; 
-	}, 3000);
 
 	function handleSave(){
-		changeSaveButton('needsToBeSaved');
 		if(waitStatus == "ready"){
-			//console.log("Wait Status: "+waitStatus);
-
+			//changeSaveButton('needsToBeSaved');
 			waitStatus = "waiting";
-
-			
-
-			//console.log("Wait Status: "+waitStatus);
+			saveTimer = setTimeout(saveForm(), 3000);
 		}
 		else if(waitStatus == "waiting"){
-			clearTimeout(timeoutHandle);
+			clearTimeout(saveTimer);
+			saveTimer = setTimeout(handleSave(), 3000);
 		}
+		//saveTimer = setTimeout(handleSave(), 3000);
 	}
 
 	function changeSaveButton(saveStatus){
@@ -61,6 +54,7 @@
 
 		posting.done(function( data ) {
 			changeSaveButton("hasBeenSaved");
+			waitStatus = "ready";
 		});
 	}
 </script>
