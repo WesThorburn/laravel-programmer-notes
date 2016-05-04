@@ -16,9 +16,26 @@
 		}
 	});
 
+	var waitStatus = "ready";
+
 	function handleSave(){
 		changeSaveButton('needsToBeSaved');
-		setTimeout(saveForm, 3000);
+		if(waitStatus == "ready"){
+			//console.log("Wait Status: "+waitStatus);
+
+			waitStatus = "waiting";
+
+			//console.log("Wait Status: "+waitStatus);
+
+			saveForm();
+
+			setTimeout(function(){ 
+				saveForm();
+				waitStatus = "ready"; 
+			}, 3000);
+
+			//console.log("Wait Status: "+waitStatus);
+		}
 	}
 
 	function changeSaveButton(saveStatus){
@@ -29,5 +46,22 @@
 			$('#saveButton').addClass("colour-green");
 			document.getElementById("saveButton").innerHTML = 'Saved <span class="glyphicon glyphicon glyphicon-ok">';
 		}
+	}
+
+	//Notes edit AJAX posting
+	function saveForm(){
+		var $form = $( this ),
+			csrfToken = document.getElementsByName("_token")[0].value;
+			problem = document.getElementById("problem").value;
+			solution = tinyMCE.activeEditor.getContent();
+
+		console.log(problem);
+		console.log(solution);
+
+		var posting = $.post( "{{action('NoteController@update', ['id' => isset($selectedNote) ? $selectedNote->id : null])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
+
+		posting.done(function( data ) {
+			changeSaveButton("hasBeenSaved");
+		});
 	}
 </script>

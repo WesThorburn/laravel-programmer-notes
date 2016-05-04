@@ -21,26 +21,19 @@
 	@elseif(isset($selectedNote))
 		@include('layouts.partials.tinymce-solution-configuration')
 		<!-- Display Note Display/Edit Form -->
-		<form role="form" id="noteForm" action="{{action('NoteController@update', ['id' => $selectedNote->id])}}" method="POST">
-			<input type="hidden" name="_method" value="put"/>
-			{{ csrf_field() }}
+		<div class="input-group">
+			<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
+			placeholder="What was the problem?" value="{{ $selectedNote->problem }}" onkeyup="handleSave()">
+			<span class="input-group-btn">
+				<button class="btn btn-default" id="settingsButton" type="button" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span></button>
+				<button class="btn btn-default" id="saveButton" type="button" onclick="saveForm()">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
+			</span>
+		</div>
 
-			<div class="input-group">
-				<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
-				placeholder="What was the problem?" value="{{ $selectedNote->problem }}" onkeyup="setTimeout(saveForm, 3000)">
-				<span class="input-group-btn">
-					<button class="btn btn-default" id="settingsButton" type="button" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span></button>
-					<button class="btn btn-default" id="saveButton" type="button">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
-				</span>
-			</div>
-
-			<div class="margin-top-10px">
-				<textarea name="solution" id="solution" type="text" class="form-control{{ $errors->has('solution') ? ' has-error' : '' }}" width="99%"
-				placeholder="How did you solve it?">{{ $selectedNote->solution }}</textarea>
-			</div>
-
-			<button type="submit" class="btn btn-default pull-right margin-top-10px">Update</button>
-		</form>
+		<div class="margin-top-10px">
+			<textarea name="solution" id="solution" type="text" class="form-control{{ $errors->has('solution') ? ' has-error' : '' }}" width="99%"
+			placeholder="How did you solve it?">{{ $selectedNote->solution }}</textarea>
+		</div>
 		@include('layouts.partials.notes-status-messages')
 	@endif
 </div>
@@ -76,22 +69,4 @@
 			oTable.search($(this).val()).draw();
 		});
 	});
-
-	//Notes edit AJAX posting
-	function saveForm(){
-		var $form = $( this ),
-			csrfToken = document.getElementsByName("_token")[0].value;
-			problem = document.getElementById("problem").value;
-			solution = document.getElementById("solution").value;
-
-		console.log(csrfToken);
-		console.log(problem);
-		console.log(solution);
-
-		var posting = $.post( "{{action('NoteController@update', ['id' => isset($selectedNote) ? $selectedNote->id : null])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
-
-		posting.done(function( data ) {
-			changeSaveButton("hasBeenSaved");
-		});
-	}
 </script>
