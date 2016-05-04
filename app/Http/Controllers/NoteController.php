@@ -66,9 +66,6 @@ class NoteController extends Controller
     	$note->problem = $request->problem;
     	$note->solution = $request->solution;
     	$note->save();
-
-    	\Session::flash('noteSaveSuccess', 'Your Note was saved successfully!');
-        return redirect('/');
     }
 
     public function notesDataTable($selectedNote = null){

@@ -17,6 +17,10 @@
 	});
 
 	var waitStatus = "ready";
+	var timeoutHandle = setTimeout(function(){ 
+		saveForm();
+		waitStatus = "ready"; 
+	}, 3000);
 
 	function handleSave(){
 		changeSaveButton('needsToBeSaved');
@@ -25,16 +29,12 @@
 
 			waitStatus = "waiting";
 
-			//console.log("Wait Status: "+waitStatus);
-
-			saveForm();
-
-			setTimeout(function(){ 
-				saveForm();
-				waitStatus = "ready"; 
-			}, 3000);
+			
 
 			//console.log("Wait Status: "+waitStatus);
+		}
+		else if(waitStatus == "waiting"){
+			clearTimeout(timeoutHandle);
 		}
 	}
 
@@ -56,7 +56,6 @@
 			solution = tinyMCE.activeEditor.getContent();
 
 		console.log(problem);
-		console.log(solution);
 
 		var posting = $.post( "{{action('NoteController@update', ['id' => isset($selectedNote) ? $selectedNote->id : null])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
 
