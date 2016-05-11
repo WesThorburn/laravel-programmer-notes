@@ -1,3 +1,11 @@
+@section('meta')
+	@if(isset($selectedNote))
+		@if($selectedNote->private)
+			<META NAME="robots" CONTENT="noindex">
+		@endif
+	@endif
+@stop
+
 <div class="col-xs-12 col-sm-4 col-md-3 padding-left-right-0px col-sm-md-lg-padding-right-15px">
 	<div class="padding-left-0px">
 		<a href="/note/create" class="btn btn-primary">Create Note</a>
