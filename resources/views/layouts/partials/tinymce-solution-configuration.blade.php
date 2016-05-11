@@ -43,6 +43,7 @@
 
 	//Notes edit AJAX posting
 	function saveForm(){
+		clearTimeout(saveTimer);
 		var $form = $( this ),
 			csrfToken = document.getElementsByName("_token")[0].value;
 			problem = document.getElementById("problem").value;
