@@ -8,10 +8,10 @@
 
 <div class="col-xs-12 col-sm-4 col-md-3 padding-left-right-0px col-sm-md-lg-padding-right-15px">
 	<div class="padding-left-0px">
-		<a href="/note/create" class="btn btn-primary">Create Note</a>
+		<input type="text" class="font-size-18px" id="noteSearchField" placeholder="Search notes">
 	</div>
 	<div class="padding-left-0px">
-		<input type="text" class="margin-top-10px font-size-18px" id="noteSearchField" placeholder="Search notes">
+		<a href="/note/create" class="margin-top-10px btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create A New Note</a>
 	</div>
 	<table id="notes-table" class="margin-top-10px table-hover responsive" cellspacing="0" width="100%">
 		<thead>
