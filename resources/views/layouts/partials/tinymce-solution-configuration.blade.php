@@ -23,11 +23,11 @@
 		if(waitStatus == "ready"){
 			changeSaveButton('needsToBeSaved');
 			waitStatus = "waiting";
-			saveTimer = setTimeout(saveForm, 3000);
+			saveTimer = setTimeout(saveForm, 2000);
 		}
 		else if(waitStatus == "waiting"){
 			clearTimeout(saveTimer);
-			saveTimer = setTimeout(saveForm, 3000);
+			saveTimer = setTimeout(saveForm, 2000);
 		}
 	}
 
