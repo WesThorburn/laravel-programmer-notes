@@ -11,7 +11,7 @@
 		<input type="text" class="font-size-18px" id="noteSearchField" placeholder="Search notes">
 	</div>
 	<div class="padding-left-0px">
-		<a href="/note/create" class="margin-top-10px btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create A New Note</a>
+		<a href="/note/create" class="margin-top-10px btn btn-primary"><span class="glyphicon glyphicon-plus margin-right-5px"></span> Create A New Note</a>
 	</div>
 	<table id="notes-table" class="margin-top-10px table-hover responsive" cellspacing="0" width="100%">
 		<thead>
