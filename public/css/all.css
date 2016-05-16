@@ -59,6 +59,10 @@
 	padding-right:15px;
 }
 
+.panel{
+	border-radius:0px;
+}
+
 .notes-text-limit{
 	text-overflow: ellipsis;
     white-space: nowrap;
