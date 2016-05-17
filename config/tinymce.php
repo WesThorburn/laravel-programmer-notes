@@ -2,7 +2,7 @@
 
 return [
 
-	'cdn' => Config('app.url').':8000/vendor/js/tinymce/tinymce.min.js',
+	'cdn' => 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.3.12/jquery.tinymce.min.js',
 
 	'default' => [
 		"selector" => ".tinymce",

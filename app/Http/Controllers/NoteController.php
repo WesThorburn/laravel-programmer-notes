@@ -26,7 +26,13 @@ class NoteController extends Controller
 		else{
 			$selectedNote = Note::orderBy('updated_at', 'DESC')->first();
 		}
-		return view('home')->with(compact('selectedNote'));
+
+        //Show view, based on auth status
+        if(\Auth::user()){
+            return view('home')->with(compact('selectedNote'));
+        }
+        return view('public')->with(compact('selectedNote'));
+		
 	}
 
     public function store(Request $request){
