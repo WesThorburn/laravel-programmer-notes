@@ -7,7 +7,7 @@
         	<div class="panel panel-default">
                 <div class="panel-heading">{{ $selectedNote->problem }}</div>
                 <div class="panel-body">
-                    {{ $selectedNote->solution }}
+                    {!! $selectedNote->solution !!}
                 </div>
             </div>
         </div>

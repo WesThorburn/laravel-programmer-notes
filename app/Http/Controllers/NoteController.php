@@ -20,19 +20,21 @@ class NoteController extends Controller
 	}
 
 	public function show($id = null){
-		if($id){
-			$selectedNote = Note::find($id);
-		}
-		else{
-			$selectedNote = Note::orderBy('updated_at', 'DESC')->first();
-		}
-
-        //Show view, based on auth status
         if(\Auth::user()){
+    		if($id){
+    			$selectedNote = Note::find($id);
+    		}
+    		else{
+    			$selectedNote = Note::where(['user_id' => \Auth::user()->id, 'private' => 0])->orderBy('updated_at', 'DESC')->first();
+    		}
             return view('home')->with(compact('selectedNote'));
         }
-        return view('public')->with(compact('selectedNote'));
-		
+
+        $publicNote = Note::where(['id' => $id, 'private' => 0])->first();
+        if($publicNote){
+            return view('public')->with(['selectedNote' => $publicNote]);
+        }
+        return redirect('/');
 	}
 
     public function store(Request $request){
