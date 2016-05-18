@@ -19,7 +19,9 @@
 		<thead>
 			<tr>
 				<th>Id</th>
-				@if(isset($selectedNote) && Auth::user()->id == $selectedNote->user_id)
+				@if(!Auth::user())
+					<th>Other Notes by {{ $selectedNote->user->name }}</th>
+				@elseif(isset($selectedNote) && Auth::user()->id == $selectedNote->user_id)
 					<th>Your Existing Notes</th>
 				@elseif(isset($selectedNote) && Auth::user()->id != $selectedNote->id)
 					<th>Other Notes by {{ $selectedNote->user->name }}</th>
