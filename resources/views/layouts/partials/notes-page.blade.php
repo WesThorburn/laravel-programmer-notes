@@ -76,7 +76,7 @@
 			order: [[2, "desc"]],
 			processing: true,
 	        serverSide: true,
-	        ajax: '/notesDataTable/'+ currentNoteUserId + '/<?php echo isset($selectedNote) ? $selectedNote->id : null ?>',
+	        ajax: '/notesDataTable/'+ currentNoteUserId + '/<?php echo isset($selectedNote) || isset($publicNote) ? $selectedNote->id : null ?>',
 	        columns: [
 				{data: 'id', name: 'id', "visible": false, searchable: false},
 				{data: 'problem', name: 'problem', searchable: true},

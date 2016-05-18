@@ -32,7 +32,7 @@ class NoteController extends Controller
 
         $publicNote = Note::where(['id' => $id, 'private' => 0])->first();
         if($publicNote){
-            return view('home')->with(compact('publicNote'));
+            return view('home')->with('selectedNote', $publicNote);
         }
         return redirect('/');
 	}
@@ -77,7 +77,13 @@ class NoteController extends Controller
     }
 
     public function notesDataTable($currentNoteUserId, $selectedNote = null){
-    	$notes = Note::select('id','problem', 'updated_at')->where('user_id', $currentNoteUserId)->orderBy('updated_at', 'desc')->get();
+        if(\Auth::user() && $currentNoteUserId == \Auth::user()->id){
+            $notes = Note::select('id','problem', 'updated_at')->where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
+        }
+        else{
+            $notes = Note::select('id','problem', 'updated_at')->where(['user_id' => $currentNoteUserId, 'private' => 0])->orderBy('updated_at', 'desc')->get();
+        }
+    	
     	return Datatables::of($notes)
     	->setRowClass(function ($note) use($selectedNote){
     		if(isset($selectedNote) && $selectedNote == $note->id){
