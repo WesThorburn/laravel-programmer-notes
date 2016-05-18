@@ -19,10 +19,12 @@
 		<thead>
 			<tr>
 				<th>Id</th>
-				@if(Auth::user())
-					<th>Existing Notes</th>
-				@else
+				@if(isset($selectedNote) && Auth::user()->id == $selectedNote->user_id)
+					<th>Your Existing Notes</th>
+				@elseif(isset($selectedNote) && Auth::user()->id != $selectedNote->id)
 					<th>Other Notes by {{ $selectedNote->user->name }}</th>
+				@else
+					<th>Existing Notes</th>
 				@endif
 				<th>Last Updated</th>
 			</tr>
