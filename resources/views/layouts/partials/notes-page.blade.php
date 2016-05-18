@@ -33,7 +33,7 @@
 	@if(isset($showCreate))
 		<!-- Create New Note -->
 		@include('layouts.partials.add-note-form')
-	@elseif(isset($selectedNote) && isset($readOnly))
+	@elseif(isset($selectedNote) && $readOnly)
 		<!-- View Note (Read Only) -->
 		<div class="panel panel-default">
             <div class="panel-heading">{{ $selectedNote->problem }}</div>

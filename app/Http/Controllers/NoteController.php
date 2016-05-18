@@ -23,11 +23,18 @@ class NoteController extends Controller
         if(\Auth::user()){
     		if($id){
     			$selectedNote = Note::find($id);
+                if($selectedNote->user_id == \Auth::user()->id){
+                    $readOnly = false;
+                }
+                else{
+                    $readOnly = true;
+                }
     		}
     		else{
     			$selectedNote = Note::where(['user_id' => \Auth::user()->id, 'private' => 0])->orderBy('updated_at', 'DESC')->first();
+                $readOnly = true;
     		}
-            return view('home')->with(compact('selectedNote'));
+            return view('home')->with(compact('selectedNote', 'readOnly'));
         }
 
         $publicNote = Note::where(['id' => $id, 'private' => 0])->first();
