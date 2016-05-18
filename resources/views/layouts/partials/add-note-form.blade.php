@@ -14,3 +14,4 @@
 	</div>
 </form>
 @include('layouts.partials.notes-status-messages')
+@include('layouts.partials.settings-modal')

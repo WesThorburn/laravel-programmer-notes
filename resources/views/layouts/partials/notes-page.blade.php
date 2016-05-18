@@ -7,12 +7,14 @@
 @stop
 
 <div class="col-xs-12 col-sm-4 col-md-3 padding-left-right-0px col-sm-md-lg-padding-right-15px">
-	<div class="padding-left-0px">
-		<input type="text" class="font-size-18px" id="noteSearchField" placeholder="Search notes">
-	</div>
-	<div class="padding-left-0px">
-		<a href="/note/create" class="margin-top-10px btn btn-primary"><span class="glyphicon glyphicon-plus margin-right-5px"></span> Create A New Note</a>
-	</div>
+	@if(Auth::user())
+		<div class="padding-left-0px">
+			<input type="text" class="font-size-18px" id="noteSearchField" placeholder="Search notes">
+		</div>
+		<div class="padding-left-0px">
+			<a href="/note/create" class="margin-top-10px btn btn-primary"><span class="glyphicon glyphicon-plus margin-right-5px"></span> Create A New Note</a>
+		</div>
+	@endif
 	<table id="notes-table" class="margin-top-10px table-hover responsive" cellspacing="0" width="100%">
 		<thead>
 			<tr>
@@ -25,10 +27,11 @@
 </div>
 <div class="col-xs-12 col-sm-8 col-md-9 padding-left-right-0px col-xs-margin-top-20px">
 	@if(isset($showCreate))
+		<!-- Create New Note -->
 		@include('layouts.partials.add-note-form')
 	@elseif(isset($selectedNote))
+		<!-- Edit Existing Note -->
 		@include('layouts.partials.tinymce-solution-configuration')
-		<!-- Display Note Display/Edit Form -->
 		<div class="input-group">
 			<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
 			placeholder="What was the problem?" value="{{ $selectedNote->problem }}" onkeyup="handleSave()">
@@ -43,10 +46,17 @@
 			placeholder="How did you solve it?">{{ $selectedNote->solution }}</textarea>
 		</div>
 		@include('layouts.partials.notes-status-messages')
+		@include('layouts.partials.settings-modal')
+	@elseif(isset($publicNote))
+		<!-- View Note (Read Only) -->
+		<div class="panel panel-default">
+            <div class="panel-heading">{{ $publicNote->problem }}</div>
+            <div class="panel-body">
+                {!! $publicNote->solution !!}
+            </div>
+        </div>
 	@endif
 </div>
-
-@include('layouts.partials.settings-modal')
 
 <script>
 	//Notes list display
