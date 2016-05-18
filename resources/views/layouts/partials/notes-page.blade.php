@@ -19,7 +19,11 @@
 		<thead>
 			<tr>
 				<th>Id</th>
-				<th>Existing Notes</th>
+				@if(Auth::user())
+					<th>Existing Notes</th>
+				@else
+					<th>Other Notes by {{ $selectedNote->user->name }}</th>
+				@endif
 				<th>Last Updated</th>
 			</tr>
 		</thead>
