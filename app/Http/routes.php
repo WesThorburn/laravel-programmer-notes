@@ -12,7 +12,7 @@
 */
 Route::group(['middleware' => ['web']], function(){
 	Route::get('/', 'NoteController@index');
-	Route::get('/notesDataTable/{selectedNote?}', 'NoteController@notesDataTable');
+	Route::get('/notesDataTable/{currentNoteUserId}/{selectedNote?}', 'NoteController@notesDataTable');
 	Route::resource('note', 'NoteController');
 	Route::post('/noteSettings', 'NoteController@noteSettings');
 	Route::auth();

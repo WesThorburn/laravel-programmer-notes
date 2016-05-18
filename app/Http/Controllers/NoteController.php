@@ -12,7 +12,7 @@ class NoteController extends Controller
 {
 	public function __construct()
 	{
-	    $this->middleware('auth', ['except' => ['show']]);
+	    $this->middleware('auth', ['except' => ['show', 'notesDataTable']]);
 	}
 
 	public function index(){
@@ -76,8 +76,8 @@ class NoteController extends Controller
     	$note->save();
     }
 
-    public function notesDataTable($selectedNote = null){
-    	$notes = Note::select('id','problem', 'updated_at')->where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
+    public function notesDataTable($currentNoteUserId, $selectedNote = null){
+    	$notes = Note::select('id','problem', 'updated_at')->where('user_id', $currentNoteUserId)->orderBy('updated_at', 'desc')->get();
     	return Datatables::of($notes)
     	->setRowClass(function ($note) use($selectedNote){
     		if(isset($selectedNote) && $selectedNote == $note->id){
