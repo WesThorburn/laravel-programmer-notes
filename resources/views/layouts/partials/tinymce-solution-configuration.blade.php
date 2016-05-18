@@ -1,4 +1,4 @@
-<script type="text/javascript" src="http://localhost:8000/vendor/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.3.12/jquery.tinymce.min.js"></script>
 <script type="text/javascript">
 	tinymce.init({
 		"selector":"#solution",
