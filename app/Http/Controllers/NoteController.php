@@ -32,7 +32,7 @@ class NoteController extends Controller
 
         $publicNote = Note::where(['id' => $id, 'private' => 0])->first();
         if($publicNote){
-            return view('home')->with('selectedNote', $publicNote);
+            return view('home')->with(['selectedNote' => $publicNote, 'readOnly' => true]);
         }
         return redirect('/');
 	}

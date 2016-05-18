@@ -33,7 +33,15 @@
 	@if(isset($showCreate))
 		<!-- Create New Note -->
 		@include('layouts.partials.add-note-form')
-	@elseif(isset($selectedNote))
+	@elseif(isset($selectedNote) && isset($readOnly))
+		<!-- View Note (Read Only) -->
+		<div class="panel panel-default">
+            <div class="panel-heading">{{ $selectedNote->problem }}</div>
+            <div class="panel-body">
+                {!! $selectedNote->solution !!}
+            </div>
+        </div>
+    @elseif(isset($selectedNote))
 		<!-- Edit Existing Note -->
 		@include('layouts.partials.tinymce-solution-configuration')
 		<div class="input-group">
@@ -51,14 +59,6 @@
 		</div>
 		@include('layouts.partials.notes-status-messages')
 		@include('layouts.partials.settings-modal')
-	@elseif(isset($publicNote))
-		<!-- View Note (Read Only) -->
-		<div class="panel panel-default">
-            <div class="panel-heading">{{ $publicNote->problem }}</div>
-            <div class="panel-body">
-                {!! $publicNote->solution !!}
-            </div>
-        </div>
 	@endif
 </div>
 
