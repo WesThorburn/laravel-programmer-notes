@@ -85,6 +85,15 @@
 	max-width:99.99% !important;
 }
 
+.navbar-default{
+	background-color:#528C37;
+}
+
+.navbar-default .navbar-nav>li>a{
+	color:white;
+}
+
+
 /*col-xs*/
 @media(max-width: 768px){
 	.col-xs-margin-top-10px{
