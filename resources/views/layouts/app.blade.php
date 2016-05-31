@@ -37,7 +37,7 @@
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -52,7 +52,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li><a class="navbar-brand" href="{{ url('/') }}">Programmers' Notebook</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
