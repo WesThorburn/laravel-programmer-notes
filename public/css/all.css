@@ -6,6 +6,10 @@
 	font-size:18px;
 }
 
+.margin-top-minus-20px{
+	margin-top:-20px;
+}
+
 .margin-top-20px{
 	margin-top:20px;
 }
@@ -87,6 +91,7 @@
 
 .navbar-default{
 	background-color:#528C37;
+	border:none;
 }
 
 .navbar-default .navbar-nav>li>a{
