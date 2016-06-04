@@ -67,7 +67,7 @@ class NoteController extends Controller
 
     public function update($id, Request $request){
     	//Check that requested note belongs to current user
-    	if(Note::find($id)->user_id != \Auth::user()->id){
+    	if(Note::find($id)->belongsToCurrentUser()){
     		\Session::flash('noteSaveError', 'There was a problem with your request!');
         	return redirect()->back();
     	}
@@ -105,7 +105,7 @@ class NoteController extends Controller
 
     public function noteSettings(Request $request){
         //Check that requested note belongs to current user
-        if(Note::find($request->id)->user_id != \Auth::user()->id){
+        if(Note::find($request->id)->belongsToCurrentUser()){
             \Session::flash('noteSaveError', 'There was a problem with your request!');
             return redirect()->back();
         }
