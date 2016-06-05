@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Models\Note;
+use App\Http\Requests;
+use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
 class NoteController extends Controller
@@ -16,32 +15,14 @@ class NoteController extends Controller
 	}
 
 	public function index(){
-		return $this->show();
+		return view('home');
 	}
 
-	public function show($id = null){
-        if(\Auth::user()){
-    		if($id){
-    			$selectedNote = Note::find($id);
-                if($selectedNote->user_id == \Auth::user()->id){
-                    $readOnly = false;
-                }
-                else{
-                    $readOnly = true;
-                }
-    		}
-    		else{
-    			$selectedNote = Note::where(['user_id' => \Auth::user()->id, 'private' => 0])->orderBy('updated_at', 'DESC')->first();
-                $readOnly = true;
-    		}
-            return view('home')->with(compact('selectedNote', 'readOnly'));
-        }
-
-        $publicNote = Note::where(['id' => $id, 'private' => 0])->first();
-        if($publicNote){
-            return view('home')->with(['selectedNote' => $publicNote, 'readOnly' => true]);
-        }
-        return redirect('/');
+	public function show(Note $note){
+        return view('home')->with([
+            'note' => $note,
+            'readOnly' => !$note->belongsToCurrentUser()
+        ]);
 	}
 
     public function store(Request $request){
@@ -66,7 +47,6 @@ class NoteController extends Controller
     }
 
     public function update($id, Request $request){
-    	//Check that requested note belongs to current user
     	if(Note::find($id)->belongsToCurrentUser()){
     		\Session::flash('noteSaveError', 'There was a problem with your request!');
         	return redirect()->back();
@@ -104,7 +84,6 @@ class NoteController extends Controller
     }
 
     public function noteSettings(Request $request){
-        //Check that requested note belongs to current user
         if(Note::find($request->id)->belongsToCurrentUser()){
             \Session::flash('noteSaveError', 'There was a problem with your request!');
             return redirect()->back();

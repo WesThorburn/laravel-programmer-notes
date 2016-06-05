@@ -54,7 +54,6 @@
 		posting.done(function( data ) {
 			changeSaveButton("hasBeenSaved");
 			waitStatus = "ready";
-			console.log(problem);
 		});
 	}
 </script>

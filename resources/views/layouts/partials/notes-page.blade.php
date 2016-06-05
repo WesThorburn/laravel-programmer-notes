@@ -1,6 +1,6 @@
 @section('meta')
-	@if(isset($selectedNote))
-		@if($selectedNote->private)
+	@if(isset($note))
+		@if($note->private)
 			<META NAME="robots" CONTENT="noindex">
 		@endif
 	@endif
@@ -20,11 +20,11 @@
 			<tr>
 				<th>Id</th>
 				@if(!Auth::user())
-					<th>Other Notes by {{ $selectedNote->user->name }}</th>
-				@elseif(isset($selectedNote) && Auth::user()->id == $selectedNote->user_id)
+					<th>Other Notes by {{ $note->user->name }}</th>
+				@elseif(isset($note) && Auth::user()->id == $note->user_id)
 					<th>Your Existing Notes</th>
-				@elseif(isset($selectedNote) && Auth::user()->id != $selectedNote->id)
-					<th>Other Notes by {{ $selectedNote->user->name }}</th>
+				@elseif(isset($note) && Auth::user()->id != $note->id)
+					<th>Other Notes by {{ $note->user->name }}</th>
 				@else
 					<th>Existing Notes</th>
 				@endif
@@ -37,20 +37,20 @@
 	@if(isset($showCreate))
 		<!-- Create New Note -->
 		@include('layouts.partials.add-note-form')
-	@elseif(isset($selectedNote) && $readOnly)
+	@elseif(isset($note) && $readOnly)
 		<!-- View Note (Read Only) -->
 		<div class="panel panel-default">
-            <div class="panel-heading">{{ $selectedNote->problem }}</div>
+            <div class="panel-heading">{{ $note->problem }}</div>
             <div class="panel-body">
-                {!! $selectedNote->solution !!}
+                {!! $note->solution !!}
             </div>
         </div>
-    @elseif(isset($selectedNote))
+    @elseif(isset($note))
 		<!-- Edit Existing Note -->
 		@include('layouts.partials.tinymce-solution-configuration')
 		<div class="input-group">
 			<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
-			placeholder="What was the problem?" value="{{ $selectedNote->problem }}" onkeyup="handleSave()">
+			placeholder="What was the problem?" value="{{ $note->problem }}" onkeyup="handleSave()">
 			<span class="input-group-btn">
 				<button class="btn btn-default" id="settingsButton" type="button" data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span></button>
 				<button class="btn btn-default" id="saveButton" type="button" onclick="saveForm()">Save <span class="glyphicon glyphicon-floppy-disk"></span></button>
@@ -59,7 +59,7 @@
 
 		<div class="margin-top-10px">
 			<textarea name="solution" id="solution" type="text" class="form-control{{ $errors->has('solution') ? ' has-error' : '' }}" width="99%"
-			placeholder="How did you solve it?">{{ $selectedNote->solution }}</textarea>
+			placeholder="How did you solve it?">{{ $note->solution }}</textarea>
 		</div>
 		@include('layouts.partials.notes-status-messages')
 		@include('layouts.partials.settings-modal')
@@ -70,8 +70,8 @@
 	//Notes list display
 	$(document).ready(function(){
 		var currentNoteUserId = '<?php 
-			if(isset($selectedNote)){ 
-				echo $selectedNote->user_id;
+			if(isset($note)){ 
+				echo $note->user_id;
 			}
 			elseif(isset($publicNote)){
 				echo $publicNote->user_id;
@@ -84,7 +84,7 @@
 			order: [[2, "desc"]],
 			processing: true,
 	        serverSide: true,
-	        ajax: '/notesDataTable/'+ currentNoteUserId + '/<?php echo isset($selectedNote) || isset($publicNote) ? $selectedNote->id : null ?>',
+	        ajax: '/notesDataTable/'+ currentNoteUserId + '/<?php echo isset($note) || isset($publicNote) ? $note->id : null ?>',
 	        columns: [
 				{data: 'id', name: 'id', "visible": false, searchable: false},
 				{data: 'problem', name: 'problem', searchable: true},

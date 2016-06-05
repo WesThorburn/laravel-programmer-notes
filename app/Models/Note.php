@@ -11,6 +11,10 @@ class Note extends Model
 		return $this->belongsTo('App\Models\User', 'user_id', 'id');
 	}
 
+	public function scopePublicNotes($query){
+		return $query->where('private', 0);
+	}
+
 	public function belongsToCurrentUser(){
 		return $this->user_id == Auth::id();
 	}
