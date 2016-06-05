@@ -42,8 +42,10 @@ class NoteController extends Controller
     }
 
     public function create(){
-    	$showCreate = true;
-    	return view('home')->with(compact('showCreate'));
+    	return view('home')->with([
+            'showCreate' => true,
+            'note' => new Note
+        ]);
     }
 
     public function update(Note $note, Request $request){

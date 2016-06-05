@@ -19,15 +19,7 @@
 		<thead>
 			<tr>
 				<th>Id</th>
-				@if(!Auth::user())
-					<th>Other Notes by {{ $note->user->name }}</th>
-				@elseif(isset($note) && Auth::user()->id == $note->user_id)
-					<th>Your Existing Notes</th>
-				@elseif(isset($note) && Auth::user()->id != $note->id)
-					<th>Other Notes by {{ $note->user->name }}</th>
-				@else
-					<th>Existing Notes</th>
-				@endif
+				
 				<th>Last Updated</th>
 			</tr>
 		</thead>
@@ -71,11 +63,11 @@
 	//Notes list display
 	$(document).ready(function(){
 		var currentNoteUserId = '<?php 
-			if(isset($note)){ 
-				echo $note->user_id;
+			if(!isset($note->user_id)){
+				echo Auth::id();
 			}
-			elseif(isset($publicNote)){
-				echo $publicNote->user_id;
+			else{
+				echo $note->user_id;
 			}?>';
 
 		var notesTable = $('#notes-table').DataTable({
