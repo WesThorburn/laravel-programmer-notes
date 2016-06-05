@@ -49,6 +49,7 @@
 		<!-- Edit Existing Note -->
 		@include('layouts.partials.tinymce-solution-configuration')
 		<div class="input-group">
+			{{ csrf_field() }}
 			<input name="problem" id="problem" type="text" class="font-size-18px form-control{{ $errors->has('problem') ? ' has-error' : ''}}" 
 			placeholder="What was the problem?" value="{{ $note->problem }}" onkeyup="handleSave()">
 			<span class="input-group-btn">

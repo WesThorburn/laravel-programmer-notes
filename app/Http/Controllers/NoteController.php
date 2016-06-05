@@ -46,8 +46,8 @@ class NoteController extends Controller
     	return view('home')->with(compact('showCreate'));
     }
 
-    public function update($id, Request $request){
-    	if(Note::find($id)->belongsToCurrentUser()){
+    public function update(Note $note, Request $request){
+    	if(!$note->belongsToCurrentUser()){
     		\Session::flash('noteSaveError', 'There was a problem with your request!');
         	return redirect()->back();
     	}
@@ -57,7 +57,6 @@ class NoteController extends Controller
     		'solution' => 'required|string'
     	]);
 
-    	$note = Note::find($id);
     	$note->problem = $request->problem;
     	$note->solution = $request->solution;
     	$note->save();

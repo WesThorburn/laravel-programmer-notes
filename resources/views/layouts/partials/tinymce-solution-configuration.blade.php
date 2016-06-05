@@ -49,7 +49,7 @@
 			problem = document.getElementById("problem").value;
 			solution = tinyMCE.activeEditor.getContent();
 
-		var posting = $.post( "{{action('NoteController@update', ['id' => isset($selectedNote) ? $selectedNote->id : null])}}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
+		var posting = $.post( "/note/{{ $note->id }}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
 
 		posting.done(function( data ) {
 			changeSaveButton("hasBeenSaved");
