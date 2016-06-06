@@ -49,7 +49,7 @@ class NoteController extends Controller
     }
 
     public function create(){
-    	return view('home')->with([
+    	return view('note')->with([
             'showCreate' => true,
             'note' => new Note
         ]);
