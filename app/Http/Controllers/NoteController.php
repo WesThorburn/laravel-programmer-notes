@@ -11,11 +11,11 @@ class NoteController extends Controller
 {
 	public function __construct()
 	{
-	    $this->middleware('auth', ['except' => ['show', 'notesDataTable']]);
+	    $this->middleware('auth', ['only' => ['store', 'create', 'update']]);
 	}
 
 	public function index(){
-		return view('home');
+		return $this->show(Note::publicNotes()->first());
 	}
 
 	public function show(Note $note){

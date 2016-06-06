@@ -10,12 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::group(['middleware' => ['web']], function(){
-	Route::get('/', 'NoteController@index');
-	Route::get('/notesDataTable/{currentNoteUserId}/{selectedNote?}', 'NoteController@notesDataTable');
-	Route::resource('note', 'NoteController');
-	Route::post('/noteSettings', 'NoteController@noteSettings');
-	Route::auth();
-});
+Route::get('/', 'NoteController@index');
+Route::resource('note', 'NoteController');
+Route::get('/notesDataTable/{currentNoteUserId}/{selectedNote?}', 'NoteController@notesDataTable');
+Route::post('/noteSettings', 'NoteController@noteSettings');
+Route::auth();
 
 
