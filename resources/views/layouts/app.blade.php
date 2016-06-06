@@ -37,7 +37,7 @@
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
+        <div class="container">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -50,12 +50,10 @@
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                @if (Auth::user())
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">Home</a></li>
-                    </ul>
-                @endif
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand" href="{{ url('/') }}">Programmers' Notebook</a></li>
+                </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">

@@ -16,3 +16,5 @@ Route::get('/notesDataTable/{note}', 'NoteController@notesDataTable');
 Route::auth();
 
 
+
+

@@ -1,13 +1,25 @@
 .form-control, .btn{
-	border-radius:0px;
+	border-radius:3px;
 }
 
 .font-size-18px{
 	font-size:18px;
 }
 
+.margin-top-minus-20px{
+	margin-top:-20px;
+}
+
+.margin-top-1px{
+	margin-top:-1px;
+}
+
 .margin-top-20px{
 	margin-top:20px;
+}
+
+.margin-top-50px{
+	margin-top:50px;
 }
 
 .margin-bottom-20px{
@@ -59,6 +71,22 @@
 	padding-right:15px;
 }
 
+.padding-top-20px{
+	padding-top:20px;
+}
+
+.padding-bottom-20px{
+	padding-bottom:20px;
+}
+
+.padding-top-40px{
+	padding-top:40px;
+}
+
+.padding-bottom-40px{
+	padding-bottom:40px;
+}
+
 .panel{
 	border-radius:0px;
 }
@@ -69,9 +97,10 @@
     overflow: hidden;
 }
 
+/* Removed conflict between input group btns and save button on note form
 .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group{
 	margin-left:10px;
-}
+}*/
 
 .colour-green{
 	color:#31942F;
@@ -81,9 +110,49 @@
 	color:#AF3535;
 }
 
+.background-color-light-grey{
+	background-color:#E3E8E3;
+}
+
+.background-color-light-green{
+	background-color:#ECF9E5;
+}
+
 .mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset{
 	max-width:99.99% !important;
 }
+
+.navbar-default{
+	background-color:#528C37;
+	border:none;
+}
+
+.navbar-default .navbar-nav>li>a{
+	color:white;
+}
+
+.main-overlay-title{
+	padding:15px;
+	font-size:34px;
+	font-weight:700;
+	color:#1D465C;
+	margin-top:-67px;
+	background-color:white;
+	opacity:0.7;
+}
+
+.sign-up-title{
+	font-size:28px;
+	font-weight:900;
+	color:#1A475C;
+}
+
+.sign-up-button{
+	background-color: #1A475C;
+	border-color: #1A475C;
+	padding: 15px 40px;
+}
+
 
 /*col-xs*/
 @media(max-width: 768px){
