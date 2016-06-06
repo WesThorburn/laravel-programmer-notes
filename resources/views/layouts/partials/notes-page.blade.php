@@ -62,14 +62,6 @@
 <script>
 	//Notes list display
 	$(document).ready(function(){
-		var currentNoteUserId = '<?php 
-			if(!isset($note->user_id)){
-				echo Auth::id();
-			}
-			else{
-				echo $note->user_id;
-			}?>';
-
 		var notesTable = $('#notes-table').DataTable({
 			dom: 'tp',
 			responsive: true,
@@ -77,7 +69,7 @@
 			order: [[2, "desc"]],
 			processing: true,
 	        serverSide: true,
-	        ajax: '/notesDataTable/'+ currentNoteUserId + '/<?php echo isset($note) || isset($publicNote) ? $note->id : null ?>',
+	        ajax: '/notesDataTable/' + '<?php echo isset($note) ? $note->id : null ?>',
 	        columns: [
 				{data: 'id', name: 'id', "visible": false, searchable: false},
 				{data: 'problem', name: 'problem', searchable: true},

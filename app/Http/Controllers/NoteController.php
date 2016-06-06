@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Session;
 use App\Models\Note;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class NoteController extends Controller
 	}
 
 	public function index(){
-		return $this->show(Note::publicNotes()->first());
+		return $this->show(Note::wherePublic()->first());
 	}
 
 	public function show(Note $note){
@@ -32,12 +34,12 @@ class NoteController extends Controller
     	]);
 
     	$note = new Note;
-	    $note->user_id = \Auth::user()->id;
+	    $note->user_id = Auth::user()->id;
 	    $note->problem = $request->problem;
 	    $note->solution = $request->solution;
 	    $note->save();
 
-	    \Session::flash('noteSaveSuccess', 'Your Note was created successfully!');
+	    Session::flash('noteSaveSuccess', 'Your Note was created successfully!');
         return redirect('/');
     }
 
@@ -50,7 +52,7 @@ class NoteController extends Controller
 
     public function update(Note $note, Request $request){
     	if(!$note->belongsToCurrentUser()){
-    		\Session::flash('noteSaveError', 'There was a problem with your request!');
+    		Session::flash('noteSaveError', 'There was a problem with your request!');
         	return redirect()->back();
     	}
 
@@ -64,17 +66,15 @@ class NoteController extends Controller
     	$note->save();
     }
 
-    public function notesDataTable($currentNoteUserId, $selectedNote = null){
-        if(\Auth::user() && $currentNoteUserId == \Auth::user()->id){
-            $notes = Note::select('id','problem', 'updated_at')->where('user_id', \Auth::user()->id)->orderBy('updated_at', 'desc')->get();
-        }
-        else{
-            $notes = Note::select('id','problem', 'updated_at')->where(['user_id' => $currentNoteUserId, 'private' => 0])->orderBy('updated_at', 'desc')->get();
-        }
+    public function notesDataTable(Note $note){
+        $notesList = Note::select('id','problem', 'updated_at')
+            ->where('user_id', $note->user_id)
+            ->orderBy('updated_at', 'desc')
+            ->get();
     	
-    	return Datatables::of($notes)
-    	->setRowClass(function ($note) use($selectedNote){
-    		if(isset($selectedNote) && $selectedNote == $note->id){
+    	return Datatables::of($notesList)
+    	->setRowClass(function ($notesList) use($note){
+    		if($notesList->id == $note->id){
     			return "active-row";
     		}
     	})
@@ -86,7 +86,7 @@ class NoteController extends Controller
 
     public function noteSettings(Request $request){
         if(Note::find($request->id)->belongsToCurrentUser()){
-            \Session::flash('noteSaveError', 'There was a problem with your request!');
+            Session::flash('noteSaveError', 'There was a problem with your request!');
             return redirect()->back();
         }
 
@@ -105,7 +105,7 @@ class NoteController extends Controller
         $note->private = $privateStatus;
         $note->save();
 
-        \Session::flash('noteSaveSuccess', 'Your Note settings were saved successfully!');
+        Session::flash('noteSaveSuccess', 'Your Note settings were saved successfully!');
         return redirect('/');
     }
 }
