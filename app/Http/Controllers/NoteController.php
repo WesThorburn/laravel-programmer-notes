@@ -13,15 +13,20 @@ class NoteController extends Controller
 {
 	public function __construct()
 	{
-	    $this->middleware('auth', ['only' => ['store', 'create', 'update']]);
+	    $this->middleware('auth', ['except' => ['index', 'show', 'notesDataTable']]);
 	}
 
 	public function index(){
-		return $this->show(Note::wherePublic()->first());
+		if(Auth::user()){
+            return $this->show(Note::wherePublic()->first());
+        }
+        else{
+            return view('home');
+        }
 	}
 
 	public function show(Note $note){
-        return view('home')->with([
+        return view('note')->with([
             'note' => $note,
             'readOnly' => !$note->belongsToCurrentUser()
         ]);
