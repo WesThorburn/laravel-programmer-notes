@@ -58,11 +58,13 @@ class NoteController extends Controller
 
     	$this->validate($request, [
     		'problem' => 'required|string',
-    		'solution' => 'required|string'
+    		'solution' => 'required|string',
+            'privateNote' => 'in:true,false'
     	]);
 
     	$note->problem = $request->problem;
     	$note->solution = $request->solution;
+        $note->private = $note->resolvePrivateValue($request->privateNote);
     	$note->save();
     }
 
@@ -73,39 +75,16 @@ class NoteController extends Controller
             ->get();
     	
     	return Datatables::of($notesList)
+        //Set active row class
     	->setRowClass(function ($notesList) use($note){
     		if($notesList->id == $note->id){
     			return "active-row";
     		}
     	})
+        //Reduce problem line length
         ->editColumn('problem', function($note){
-                return '<div class="notes-text-limit">'.$note->problem.'</div>';
-            })
+            return '<div class="notes-text-limit">'.$note->problem.'</div>';
+        })
     	->make(true);
-    }
-
-    public function noteSettings(Request $request){
-        if(Note::find($request->id)->belongsToCurrentUser()){
-            Session::flash('noteSaveError', 'There was a problem with your request!');
-            return redirect()->back();
-        }
-
-        $this->validate($request, [
-            'privateNote' => 'in:on,off',
-        ]);
-
-        if($request->privateNote == "on"){
-            $privateStatus = 1;
-        }
-        else{
-            $privateStatus = 0;
-        }
-
-        $note = Note::find($request->id);
-        $note->private = $privateStatus;
-        $note->save();
-
-        Session::flash('noteSaveSuccess', 'Your Note settings were saved successfully!');
-        return redirect('/');
     }
 }

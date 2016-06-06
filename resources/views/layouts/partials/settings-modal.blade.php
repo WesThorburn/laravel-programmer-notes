@@ -1,4 +1,4 @@
-@if(isset($selectedNote))
+@if(isset($note))
     <!-- Settings Modal -->
     <div id="settingsModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -9,20 +9,18 @@
                     <h4 class="modal-title">Note Settings</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" id="noteSettingsForm" action="{{action('NoteController@noteSettings', ['id' => $selectedNote->id])}}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="privateNote" @if($selectedNote->private) checked @endif> Make this note private.
-                                </label>
-                            </div>
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="privateNote" name="privateNote" @if($note->private) checked @endif> Make this note private.
+                            </label>
                         </div>
-                </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-default pull-right margin-top-10px">Save</button>
                     </div>
-                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" onclick="saveForm()" data-dismiss="modal" class="btn btn-default pull-right margin-top-10px">Save</button>
+                </div>
             </div>
 
         </div>

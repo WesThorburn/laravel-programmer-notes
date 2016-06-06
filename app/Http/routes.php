@@ -13,7 +13,6 @@
 Route::get('/', 'NoteController@index');
 Route::resource('note', 'NoteController');
 Route::get('/notesDataTable/{note}', 'NoteController@notesDataTable');
-Route::post('/noteSettings', 'NoteController@noteSettings');
 Route::auth();
 
 

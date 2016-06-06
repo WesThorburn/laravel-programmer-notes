@@ -18,4 +18,8 @@ class Note extends Model
 	public function belongsToCurrentUser(){
 		return $this->user_id == Auth::id();
 	}
+
+	public function resolvePrivateValue($privateValue){
+		return $privateValue == "true" ? 1 : 0;
+	}
 }

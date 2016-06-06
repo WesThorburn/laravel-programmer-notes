@@ -48,8 +48,9 @@
 			csrfToken = document.getElementsByName("_token")[0].value;
 			problem = document.getElementById("problem").value;
 			solution = tinyMCE.activeEditor.getContent();
+			privateNote = document.getElementById("privateNote").checked;
 
-		var posting = $.post( "/note/{{ $note->id }}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution } );
+		var posting = $.post( "/note/{{ $note->id }}", { _method: 'put', _token: csrfToken, problem: problem, solution: solution, privateNote: privateNote } );
 
 		posting.done(function( data ) {
 			changeSaveButton("hasBeenSaved");
