@@ -69,7 +69,7 @@
 			order: [[2, "desc"]],
 			processing: true,
 	        serverSide: true,
-	        ajax: '/notesDataTable/' + '<?php echo isset($note) ? $note->id : null ?>',
+	        ajax: '/notesDataTable/' + '<?php echo isset($note->id) ? $note->id : 0 ?>',
 	        columns: [
 				{data: 'id', name: 'id', "visible": false, searchable: false},
 				{data: 'problem', name: 'problem', searchable: true},

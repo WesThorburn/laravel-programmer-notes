@@ -73,7 +73,14 @@ class NoteController extends Controller
     	$note->save();
     }
 
-    public function notesDataTable(Note $note){
+    public function notesDataTable($noteId){
+        if($noteId == 0){
+            $note = Note::first();
+        }
+        else{
+            $note = Note::find($noteId);
+        }
+
         $notesList = Note::select('id','problem', 'updated_at')
             ->where('user_id', $note->user_id)
             ->orderBy('updated_at', 'desc')
