@@ -9,6 +9,7 @@
 		"menubar":"",
 		"plugins":["advlist autolink link image lists charmap hr anchor pagebreak","searchreplace wordcount visualblocks visualchars fullscreen insertdatetime nonbreaking","save table contextmenu directionality template paste"],
 		"toolbar":"undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist",
+		"content_css":"/css/tinymce-content.css",
 		"setup":function(ed) {
 		    ed.on('keyup', function(e) {
 		    	handleSave();

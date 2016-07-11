@@ -16,7 +16,7 @@ var elixirTypscript = require('elixir-typescript');
 elixir(function(mix) {
     mix.sass('app.scss');
     mix.styles([
-    	'customstyles.css',
-    	'tinymce-content.css'
+    	'customstyles.css'
     ]);
+    mix.copy('resources/assets/css/tinymce-content.css', 'public/css');
 });
